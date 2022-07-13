@@ -8,10 +8,11 @@ Ginger is a library for scraping and parsing web pages.
 import { Ginger } from 'https://deno.land/x/ginger/src/mod.ts';
 
 // Get the title of google.com
-const text = fetch("https://google.com").then(res => res.text());
+const text = await fetch("https://google.com").then(res => res.text());
 const ginger = new Ginger(text);
 
 const title = ginger.title();
+// "Google"
 
 // print the body of the webpage
 const body = ginger.body();
