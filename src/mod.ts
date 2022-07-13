@@ -1,5 +1,17 @@
 import { DOMParser } from '../deps.ts';
 // class for Ginger instance
+
+export class HtmlNode {
+  html: string;
+  constructor(html: string) {
+    this.html = html;
+  }
+
+  text() {
+    return new DOMParser().parseFromString(this.html, "text/html")!.querySelector("body")!.textContent;
+  }
+}
+
 export class Ginger {
 content: string;
   constructor(content: string) {
@@ -22,7 +34,7 @@ content: string;
     return this._tree()!.querySelector("body")!.textContent;
   }
 
-  find(tag: string, attrs?: any): string {
+  find(tag: string, attrs?: any): HtmlNode {
     const elements = this._tree()!.getElementsByTagName(tag);
     if (attrs) {
       const keys = Object.keys(attrs);
@@ -38,16 +50,16 @@ content: string;
           }
         }
         if (isMatch) {
-          return element.textContent;
+          return new HtmlNode(element.outerHTML);
         }
       }
     }
-    return this._tree()!.querySelector(tag)!.textContent;
+    return new HtmlNode(this._tree()!.querySelector(tag)!.outerHTML);
   }
 
-  findAll(tag: string, attrs?: any): string[] {
+  findAll(tag: string, attrs?: any): HtmlNode[] {
     const elements = this._tree()!.getElementsByTagName(tag);
-    const result: string[] = [];
+    const result: HtmlNode[] = [];
     for (let i = 0; i < elements.length; i++) {
       if (attrs) {
         const element = elements[i];
@@ -62,11 +74,11 @@ content: string;
           }
         }
         if (isMatch) {
-          result.push(element.textContent);
+          result.push(new HtmlNode(element.outerHTML));
         }
         
       } else {
-        result.push(elements[i].textContent);
+        result.push(new HtmlNode(elements[i].outerHTML));
       }
     }
      return result;

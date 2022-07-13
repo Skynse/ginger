@@ -19,6 +19,7 @@ const body = ginger.body();
 
 // find paragraph
 const p = ginger.find("p");
+// returns outer html content
 ```
 
 ## Testing

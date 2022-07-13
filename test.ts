@@ -24,12 +24,12 @@ Deno.test('parse_specific_attr', () => {
     const ginger = new Ginger(text);
     const name = ginger.find('a', {'class': 'sister'});
     console.log(name);
-    assertEquals(name, "Tillie");
+    assertEquals(name.text(), "Tillie");
 })
 
 Deno.test('parse_specific_attr_multiple', () => {
     const ginger = new Ginger(text);
     const names = ginger.findAll('a', {'class': 'older'});
     console.log(names);
-    assertEquals(names, ["Elsie", "Lacie",]);
+    assertEquals(names.map(m=>m.text()), ["Elsie", "Lacie",]);
 })
