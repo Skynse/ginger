@@ -44,18 +44,27 @@ content: string;
         for (let j = 0; j < keys.length; j++) {
           const key = keys[j];
           const value = attrs[key];
-          if (element.getAttribute(key) !== value) {
+
+          // check if value is a regex
+          if (value instanceof RegExp) {
+            if (!value.test(element.getAttribute(key)!)) {
+              isMatch = false;
+              break;
+            }
+          }
+          // check if value is a string
+          else if (element.getAttribute(key) !== value) {
             isMatch = false;
             break;
           }
-        }
-        if (isMatch) {
-          return new HtmlNode(element.outerHTML);
-        }
+      }
+      if (isMatch) {
+        return new HtmlNode(element.outerHTML);
       }
     }
-    return new HtmlNode(this._tree()!.querySelector(tag)!.outerHTML);
   }
+    return new HtmlNode(this._tree()!.querySelector(tag)!.outerHTML);
+}
 
   findAll(tag: string, attrs?: any): HtmlNode[] {
     const elements = this._tree()!.getElementsByTagName(tag);
@@ -68,7 +77,16 @@ content: string;
         for (let j = 0; j < keys.length; j++) {
           const key = keys[j];
           const value = attrs[key];
-          if (element.getAttribute(key) !== value) {
+
+          // check if value is a regex
+          if (value instanceof RegExp) {
+            if (!value.test(element.getAttribute(key)!)) {
+              isMatch = false;
+              break;
+            }
+          }
+          // check if value is a string
+          else if (element.getAttribute(key) !== value) {
             isMatch = false;
             break;
           }

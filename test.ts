@@ -33,3 +33,9 @@ Deno.test('parse_specific_attr_multiple', () => {
     console.log(names);
     assertEquals(names.map(m=>m.text()), ["Elsie", "Lacie",]);
 })
+
+Deno.test('test_regex', () => {
+    const ginger = new Ginger(text);
+    const names = ginger.findAll('a', {'class': new RegExp("old")})
+    assertEquals(names.map(m=>m.text()), ["Elsie", "Lacie",]);
+})
