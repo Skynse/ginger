@@ -1,5 +1,5 @@
-import { Ginger } from '../src/mod.ts';
-import { assertEquals } from '../test_deps.ts';
+import { Ginger } from './src/mod.ts';
+import { assertEquals } from './test_deps.ts';
 
 const text = `<html><head><title>The Dormouse's story</title></head>
 <body>

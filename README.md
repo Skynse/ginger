@@ -1,3 +1,5 @@
+<img src="imgs/icon.svg" width=200/>
+
 # Ginger
 Ginger is a library for scraping and parsing web pages.
 
@@ -20,5 +22,5 @@ const p = ginger.find("p");
 
 ## Testing
 ```bash
-deno test tests/test_suite.ts
+deno test test.ts
 ```

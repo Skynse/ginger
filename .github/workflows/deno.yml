@@ -21,4 +21,4 @@ jobs:
         run: deno --version
 
       - name: Run tests
-        run: deno tests/test_suite.ts
+        run: deno test test.ts
